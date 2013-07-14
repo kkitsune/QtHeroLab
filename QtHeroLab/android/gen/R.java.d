@@ -1,0 +1,24 @@
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/gen/numsgil/QtHeroLab/R.java \
+ : /home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-ja/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-zh-rCN/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-pl/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-de/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-fr/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-fa/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values/libs.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-rs/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-ms/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-et/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-es/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-el/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-nb/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-it/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-nl/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-ru/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/layout/splash.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-id/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-ro/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-zh-rTW/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/res/values-pt-rBR/strings.xml \
+/home/numsgil/Qt/Projects/QtHeroLab/QtHeroLab/android/bin/AndroidManifest.xml \

@@ -14,6 +14,7 @@ QML_IMPORT_PATH =
 win32: DEFINES += _CRT_SECURE_NO_WARNINGS
 DEFINES += QUAZIP_STATIC
 win32: include(../zlib-1.2.8/zlib.pri)
+linux: LIBS += -lz
 include(../quazip-0.5.1/quazip/quazip.pri)
 
 # The .cpp file which was generated for your project. Feel free to hack it.

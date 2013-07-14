@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import HeroLab 1.0
 
 Rectangle
 {
@@ -14,4 +15,10 @@ Rectangle
         anchors.fill: parent
 		onClicked: Qt.quit();
     }
+
+	Portfolio
+	{
+		id: por
+		file : "Sonitri the Star Queen.por"
+	}
 }

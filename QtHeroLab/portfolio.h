@@ -5,8 +5,10 @@
 #include <QObject>
 #include <QFile>
 #include <QUrl>
+#include <QMap>
 
-class QDomDocument;
+class QDomElement;
+
 
 class Portfolio : public QObject
 {
@@ -14,6 +16,8 @@ class Portfolio : public QObject
 	Q_PROPERTY(QString file READ fileName WRITE setFile NOTIFY fileChanged);
 	Q_PROPERTY(QUrl searchPath READ searchPath);
 public:
+	static QUrl getGlobalSearchPath();
+
 	Portfolio(QObject* parent = 0);
 	virtual ~Portfolio();
 
@@ -22,11 +26,15 @@ public:
 	virtual QString fileName();
 	virtual void setFile(const QString& file);
 
+	Q_INVOKABLE virtual QString getCharacter(const QString& name);
+
 signals:
 	void fileChanged(const QString& newFile);
 
 protected:
-	virtual void parseIndex(QDomDocument* doc);
+	virtual void parseIndex(QuaZip& qz, const QDomElement& root);
+
+	QMap<QString, QString> clist;
 
 	QuaZipFile* mZFile;
 	QUrl mSearchPath;

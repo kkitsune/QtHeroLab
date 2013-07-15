@@ -6,15 +6,8 @@
 #include "portfolio.h"
 
 Portfolio::Portfolio(QObject* parent) :
-	QObject(parent), mZFile(new QuaZipFile(this)), mPor(0)
+	QObject(parent), mZFile(new QuaZipFile(this)), mSearchPath(getGlobalSearchPath()), mPor(0)
 {
-#if defined(Q_OS_WIN)
-	mSearchPath = QDir::homePath() + "/My Documents/Hero Lab/Portfolios/";
-#elif defined(Q_OS_ANDROID)
-	mSearchPath = "/sdcard/HeroLab/";
-#elif defined(Q_OS_LINUX)
-	mSearchPath = QDir::homePath() + "/HeroLab/";
-#endif
 }
 
 Portfolio::~Portfolio()
@@ -57,13 +50,45 @@ void Portfolio::setFile(const QString &file)
 	Q_ASSERT(doc->setContent(mZFile));
 	mZFile->close();
 
-	parseIndex(doc);
+	parseIndex(qz, doc->documentElement());
 
 	delete doc;
 	qz.close();
 }
 
-
-void Portfolio::parseIndex(QDomDocument* doc)
+QString Portfolio::getCharacter(const QString& name)
 {
+	if(clist.contains(name))
+		return clist[name];
+	else
+		return QString();
+}
+
+void Portfolio::parseIndex(QuaZip& qz, const QDomElement& root)
+{
+	Q_UNUSED(qz);
+	Q_ASSERT(root.firstChildElement("game").hasAttribute("name"));
+	Q_ASSERT(root.firstChildElement("game").attribute("name") == "Pathfinder Roleplaying Game");
+	for(QDomElement c = root.firstChildElement("characters").firstChildElement("character"); !c.isNull(); c = c.nextSiblingElement("character"))
+	{
+		qDebug() << "Name : " << c.attribute("name");
+		QDomElement block;
+		for(block = c.firstChildElement("statblocks").firstChildElement("statblock"); !block.isNull(); block.nextSiblingElement("statblock"))
+			if(block.attribute("format") == "text")
+				break;
+		Q_ASSERT(!block.isNull());
+		qDebug() << "Statblock location : " << block.attribute("folder") + "/" + block.attribute("filename");
+		clist.insert(c.attribute("name"), block.attribute("folder") + "/" + block.attribute("filename"));
+	}
+}
+
+QUrl Portfolio::getGlobalSearchPath()
+{
+#if defined(Q_OS_WIN)
+	return QDir::homePath() + "/My Documents/Hero Lab/Portfolios/";
+#elif defined(Q_OS_ANDROID)
+	return "/sdcard/HeroLab/";
+#elif defined(Q_OS_LINUX)
+	return QDir::homePath() + "/HeroLab/";
+#endif
 }

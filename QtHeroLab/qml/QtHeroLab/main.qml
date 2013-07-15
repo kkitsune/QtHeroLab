@@ -25,10 +25,11 @@ Image
 			var list = path.list();
 			for(var i = 0; i < list.length; i++)
 				console.debug(list[i]);
+
+			por.file = list[0];
 		}
 
 		id: por
-		file : "Sonitri the Star Queen.por"
 	}
 
 	Rectangle
@@ -43,6 +44,7 @@ Image
 		anchors.verticalCenter: parent.verticalCenter
 		Text
 		{
+			color: "white"
 			text: qsTr("Hello World")
 			anchors.fill: parent
 			verticalAlignment: Text.AlignVCenter

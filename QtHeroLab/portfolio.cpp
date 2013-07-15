@@ -87,7 +87,7 @@ QUrl Portfolio::getGlobalSearchPath()
 #if defined(Q_OS_WIN)
 	return QDir::homePath() + "/My Documents/Hero Lab/Portfolios/";
 #elif defined(Q_OS_ANDROID)
-	return "/sdcard/HeroLab/";
+	return QUrl("/sdcard/HeroLab/");
 #elif defined(Q_OS_LINUX)
 	return QDir::homePath() + "/HeroLab/";
 #endif

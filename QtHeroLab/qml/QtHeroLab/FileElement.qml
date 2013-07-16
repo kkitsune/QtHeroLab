@@ -12,6 +12,7 @@ Rectangle
 	border.color: "black"
 	Text
 	{
+		Component.onCompleted: if(platform.isAndroid) font.pixelSize *= 2
 		x: 5
 		y: 5
 		id: label

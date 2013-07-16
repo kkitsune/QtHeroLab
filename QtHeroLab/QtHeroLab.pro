@@ -22,7 +22,8 @@ include(../quazip-0.5.1/quazip/quazip.pri)
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     portfolio.cpp \
-    filelister.cpp
+    filelister.cpp \
+    platform.cpp
 
 # Installation path
 # target.path =
@@ -33,7 +34,8 @@ qtcAddDeployment()
 
 HEADERS += \
     portfolio.h \
-    filelister.h
+    filelister.h \
+    platform.h
 
 OTHER_FILES += \
     android/src/org/qtproject/qt5/android/bindings/QtApplication.java \

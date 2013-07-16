@@ -8,19 +8,45 @@ Image
 	fillMode: Image.Tile
 	source: "mainwindow.bmp"
 
-	FileLister { id: path }
 	Portfolio
 	{
+		property QtObject path : FileLister { }
+		property var dir
+
 		Component.onCompleted:
 		{
-			var list = path.list();
-			for(var i = 0; i < list.length; i++)
-				porList.model.append({"name" : list[i]});
+			dir = path.list();
+			fillList();
+		}
+
+		function fillList()
+		{
+			if(path.level > 0)
+				porList.model.append({"name": "../"});
+			for(var i = 0; i < dir.length; i++)
+				porList.model.append({"name": dir[i]});
 		}
 
 		function onFileSelected(index)
 		{
-			porList.model.clear()
+			var t = porList.model.get(index).name;
+			if(t[t.length - 1] === "/")
+			{
+				if(t === "../")
+				{
+					path.upOne();
+					dir = path.list();
+				}
+				else
+					dir = path.list(t);
+				porList.model.clear();
+				fillList();
+			}
+			else
+			{
+				file = dir[index];
+				porList.model.clear();
+			}
 		}
 
 		id: por

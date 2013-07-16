@@ -13,8 +13,8 @@ class QDomElement;
 class Portfolio : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QString file READ fileName WRITE setFile NOTIFY fileChanged);
-	Q_PROPERTY(QUrl searchPath READ searchPath);
+	Q_PROPERTY(QString file READ fileName WRITE setFile NOTIFY fileChanged)
+	Q_PROPERTY(QUrl searchPath READ searchPath)
 public:
 	static QUrl getGlobalSearchPath();
 

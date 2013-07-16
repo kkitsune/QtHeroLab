@@ -3,53 +3,53 @@ import HeroLab 1.0
 
 Image
 {
-    width: 360
-    height: 360
+	width: 800
+	height: 600
 	fillMode: Image.Tile
 	source: "mainwindow.bmp"
 
-	MouseArea
-	{
-        anchors.fill: parent
-		onClicked: Qt.quit();
-    }
-
-	FileLister
-	{
-		id: path
-	}
+	FileLister { id: path }
 	Portfolio
 	{
 		Component.onCompleted:
 		{
 			var list = path.list();
 			for(var i = 0; i < list.length; i++)
-				console.debug(list[i]);
+				porList.model.append({"name" : list[i]});
+		}
 
-			por.file = list[0];
+		function onFileSelected(index)
+		{
+			porList.model.clear()
 		}
 
 		id: por
 	}
 
-	Rectangle
+	ListView
 	{
-		width: 180
-		height: 50
-		color: "#80333fa6"
-		radius: 15
-		border.width: 2
-		border.color: "black"
-		anchors.horizontalCenter: parent.horizontalCenter
-		anchors.verticalCenter: parent.verticalCenter
-		Text
+		id: porList
+		clip: true
+		anchors.rightMargin: 25
+		anchors.leftMargin: 25
+		anchors.bottomMargin: 25
+		anchors.topMargin: 25
+		anchors.fill: parent
+		model: ListModel { }
+		delegate: Item
 		{
-			color: "white"
-			text: qsTr("Hello World")
-			anchors.fill: parent
-			verticalAlignment: Text.AlignVCenter
-			horizontalAlignment: Text.AlignHCenter
-			font.pointSize: 20
+			height: row.height + 5
+			Row
+			{
+				id: row
+				spacing: 5
+				FileElement
+				{
+					text: name
+					anchors.verticalCenter: parent.verticalCenter
+					onClicked: por.onFileSelected(index)
+				}
+			}
 		}
 	}
 }

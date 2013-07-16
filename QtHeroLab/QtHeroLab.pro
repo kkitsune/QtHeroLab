@@ -63,4 +63,5 @@ OTHER_FILES += \
     android/res/values-ro/strings.xml \
     android/res/values-zh-rTW/strings.xml \
     android/res/values-pt-rBR/strings.xml \
-    android/AndroidManifest.xml
+    android/AndroidManifest.xml \
+    qml/QtHeroLab/FileElement.qml

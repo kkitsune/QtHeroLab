@@ -44,7 +44,7 @@ Image
 			}
 			else
 			{
-				file = dir[index];
+				file = t;
 				porList.model.clear();
 			}
 		}

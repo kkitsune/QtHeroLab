@@ -66,6 +66,8 @@ QString Portfolio::getCharacter(const QString& name)
 
 void Portfolio::parseIndex(QuaZip& qz, const QDomElement& root)
 {
+	clist.clear();
+
 	Q_ASSERT(root.firstChildElement("game").hasAttribute("name"));
 	Q_ASSERT(root.firstChildElement("game").attribute("name") == "Pathfinder Roleplaying Game");
 	for(QDomElement c = root.firstChildElement("characters").firstChildElement("character"); !c.isNull(); c = c.nextSiblingElement("character"))

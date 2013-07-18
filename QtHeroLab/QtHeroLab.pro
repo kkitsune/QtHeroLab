@@ -66,4 +66,4 @@ OTHER_FILES += \
     android/res/values-zh-rTW/strings.xml \
     android/res/values-pt-rBR/strings.xml \
     android/AndroidManifest.xml \
-    qml/QtHeroLab/FileElement.qml
+    qml/QtHeroLab/CustomListElement.qml

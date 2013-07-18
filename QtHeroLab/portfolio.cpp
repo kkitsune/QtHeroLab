@@ -66,7 +66,6 @@ QString Portfolio::getCharacter(const QString& name)
 
 void Portfolio::parseIndex(QuaZip& qz, const QDomElement& root)
 {
-	Q_UNUSED(qz);
 	Q_ASSERT(root.firstChildElement("game").hasAttribute("name"));
 	Q_ASSERT(root.firstChildElement("game").attribute("name") == "Pathfinder Roleplaying Game");
 	for(QDomElement c = root.firstChildElement("characters").firstChildElement("character"); !c.isNull(); c = c.nextSiblingElement("character"))
@@ -78,7 +77,10 @@ void Portfolio::parseIndex(QuaZip& qz, const QDomElement& root)
 				break;
 		Q_ASSERT(!block.isNull());
 		qDebug() << "Statblock location : " << block.attribute("folder") + "/" + block.attribute("filename");
-		clist.insert(c.attribute("name"), block.attribute("folder") + "/" + block.attribute("filename"));
+		qz.setCurrentFile(block.attribute("folder") + "/" + block.attribute("filename"));
+		Q_ASSERT(mZFile->open(QIODevice::ReadOnly));
+		clist.insert(c.attribute("name"), QString(mZFile->readAll().constData()));
+		mZFile->close();
 	}
 }
 

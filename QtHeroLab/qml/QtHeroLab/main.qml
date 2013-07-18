@@ -45,37 +45,59 @@ Image
 			else
 			{
 				file = t;
-				porList.model.clear();
+				charList.view.model.clear();
+				for(var i = 0; i < characterList.length; i++)
+					charList.view.model.append({"name": characterList[i]});
+				charList.visible = true;
+				charList.enabled = true;
+				porList.visible = false;
+				porList.enabled = false;
 			}
 		}
 
 		id: por
 	}
 
-	ListView
+	PortfolioList
 	{
 		id: porList
-		clip: true
-		anchors.rightMargin: 25
-		anchors.leftMargin: 25
-		anchors.bottomMargin: 25
-		anchors.topMargin: 25
-		anchors.fill: parent
-		model: ListModel { }
-		delegate: Item
+		onItemClicked: por.onFileSelected(index)
+	}
+
+	CharacterList
+	{
+		id: charList
+		visible: false
+		enabled: false
+		onCharSelected:
 		{
-			height: row.height + 5
-			Row
-			{
-				id: row
-				spacing: 5
-				FileElement
-				{
-					text: name
-					anchors.verticalCenter: parent.verticalCenter
-					onClicked: por.onFileSelected(index)
-				}
-			}
+			block.text = por.getCharacter(name);
+			visible = false;
+			enabled = false;
+			block.visible = true;
+			block.enabled = true;
+		}
+		onBack:
+		{
+			view.model.clear();
+			visible = false;
+			enabled = false;
+			porList.visible = true;
+			porList.enabled = true;
+		}
+	}
+
+	StatBlock
+	{
+		id: block
+		visible: false
+		enabled: false
+		onBack:
+		{
+			visible = false;
+			enabled = false;
+			charList.visible = true;
+			charList.enabled = true;
 		}
 	}
 }

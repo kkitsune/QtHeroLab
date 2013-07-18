@@ -15,6 +15,7 @@ class Portfolio : public QObject
 	Q_OBJECT
 	Q_PROPERTY(QString file READ fileName WRITE setFile NOTIFY fileChanged)
 	Q_PROPERTY(QUrl searchPath READ searchPath)
+	Q_PROPERTY(QList<QString> characterList READ characterList)
 public:
 	static QUrl getGlobalSearchPath();
 
@@ -22,6 +23,7 @@ public:
 	virtual ~Portfolio();
 
 	virtual inline QUrl searchPath() { return mSearchPath; }
+	virtual inline QList<QString> characterList() { return clist.keys(); }
 
 	virtual QString fileName();
 	virtual void setFile(const QString& file);

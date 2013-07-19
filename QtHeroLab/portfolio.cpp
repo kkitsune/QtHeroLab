@@ -33,27 +33,28 @@ void Portfolio::setFile(const QString &file)
 	}
 
 	QString fullPath = searchPath().resolved(QUrl("./" + file)).toString();
-	qDebug() << "Path : " << fullPath;
 	mPor = new QFile(fullPath, this);
-	qDebug() << "Exists : " << mPor->exists();
 
 	QuaZip qz(mPor);
-	Q_ASSERT(qz.open(QuaZip::mdUnzip));
-	Q_ASSERT(qz.setCurrentFile("index.xml"));
-	qDebug() << "Current file : " << qz.getCurrentFileName();
+	if(qz.open(QuaZip::mdUnzip))
+	{
+		qz.setCurrentFile("index.xml");
+		mZFile->setZip(&qz);
+		if(mZFile->open(QIODevice::ReadOnly))
+		{
+			QDomDocument* doc = new QDomDocument;
+			doc->setContent(mZFile);
+			mZFile->close();
 
-	mZFile->setZip(&qz);
-	Q_ASSERT(mZFile->open(QIODevice::ReadOnly));
-	qDebug() << "Actual file : " << mZFile->getActualFileName();
+			parseIndex(qz, doc->documentElement());
 
-	QDomDocument* doc = new QDomDocument;
-	Q_ASSERT(doc->setContent(mZFile));
-	mZFile->close();
+			delete doc;
+		}
+		else Q_ASSERT(false);
 
-	parseIndex(qz, doc->documentElement());
-
-	delete doc;
-	qz.close();
+		qz.close();
+	}
+	else Q_ASSERT(false);
 }
 
 QString Portfolio::getCharacter(const QString& name)
@@ -72,17 +73,18 @@ void Portfolio::parseIndex(QuaZip& qz, const QDomElement& root)
 	Q_ASSERT(root.firstChildElement("game").attribute("name") == "Pathfinder Roleplaying Game");
 	for(QDomElement c = root.firstChildElement("characters").firstChildElement("character"); !c.isNull(); c = c.nextSiblingElement("character"))
 	{
-		qDebug() << "Name : " << c.attribute("name");
 		QDomElement block;
 		for(block = c.firstChildElement("statblocks").firstChildElement("statblock"); !block.isNull(); block.nextSiblingElement("statblock"))
 			if(block.attribute("format") == "text")
 				break;
 		Q_ASSERT(!block.isNull());
-		qDebug() << "Statblock location : " << block.attribute("folder") + "/" + block.attribute("filename");
 		qz.setCurrentFile(block.attribute("folder") + "/" + block.attribute("filename"));
-		Q_ASSERT(mZFile->open(QIODevice::ReadOnly));
-		clist.insert(c.attribute("name"), QString(mZFile->readAll().constData()));
-		mZFile->close();
+		if(mZFile->open(QIODevice::ReadOnly))
+		{
+			clist.insert(c.attribute("name"), QString(mZFile->readAll().constData()));
+			mZFile->close();
+		}
+		else Q_ASSERT(false);
 	}
 }
 

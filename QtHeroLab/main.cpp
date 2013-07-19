@@ -1,6 +1,6 @@
+#include <qtquick2applicationviewer.h>
 #include <QGuiApplication>
 #include <QtQml>
-#include "qtquick2applicationviewer.h"
 
 #include "filelister.h"
 #include "portfolio.h"

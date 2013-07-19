@@ -36,7 +36,9 @@ QStringList FileLister::list(const QString& subDir)
 
 void FileLister::upOne()
 {
-	m_level--;
-	Q_ASSERT(m_level >= 0);
-	Q_ASSERT(path->cdUp());
+	if(m_level > 0)
+	{
+		m_level--;
+		path->cdUp();
+	}
 }

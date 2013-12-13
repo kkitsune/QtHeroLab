@@ -1,23 +1,14 @@
-#include <qtquick2applicationviewer.h>
+#include <qtquick2controlsapplicationviewer.h>
 #include <QGuiApplication>
 #include <QtQml>
 
-#include "filelister.h"
-#include "portfolio.h"
-#include "platform.h"
-
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
-    QtQuick2ApplicationViewer viewer;
-	Platform p(viewer.engine());
-	Q_UNUSED(p);
+	Application app(argc, argv);
+	QtQuick2ControlsApplicationViewer viewer;
 
-	qmlRegisterType<Portfolio>("HeroLab", 1, 0, "Portfolio");
-	qmlRegisterType<FileLister>("HeroLab", 1, 0, "FileLister");
-
-    viewer.setMainQmlFile(QStringLiteral("qml/QtHeroLab/main.qml"));
-    viewer.showExpanded();
+	viewer.setMainQmlFile(QStringLiteral("qml/main.qml"));
+	viewer.show();
 
     return app.exec();
 }
